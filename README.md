@@ -21,19 +21,19 @@ A **LogBrasil Distribuição S.A.** opera com 6 centros de distribuição (CDs) 
 ## 🖼️ Páginas do Dashboard
 
 ### 1. Visão Executiva
-*(Substitua este texto pelo caminho da imagem: `![Visão Executiva](imagens/pagina1.png)`)*
+![Visão Executiva](imagens/Visao_Executiva.png)
 * **Destaques:** KPIs de entregas, % OTIF, gap vs. meta, custo por km, margem de frete e distribuição geográfica por UF.
 
 ### 2. Nível de Serviço (SLA)
-*(Substitua este texto pelo caminho da imagem: `![Nível de Serviço](imagens/pagina2.png)`)*
+![Nível de Serviço](imagens/Nível_servico.png)
 * **Destaques:** Matriz de desempenho por transportadora, dispersão de lead time x distância e análise de atraso médio.
 
 ### 3. Custos e Rentabilidade
-*(Substitua este texto pelo caminho da imagem: `![Custos e Rentabilidade](imagens/pagina3.png)`)*
+![Custos e Rentabilidade](imagens/Custo_Rentabilidade.png)
 * **Destaques:** Custo por km por modal/veículo, gráfico de Pareto por cliente e custo por tonelada por CD.
 
 ### 4. Ocorrências e Detalhamento (Drill-Through)
-*(Substitua este texto pelo caminho da imagem: `![Ocorrências](imagens/pagina4.png)`)*
+![Ocorrências](imagens/Ocorrencia_Detalhes.png)
 * **Destaques:** Valor de mercadoria em risco, causas-raiz de ocorrências por responsável e detalhamento em nível de CT-e.
 
 ---
