@@ -1,0 +1,95 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "8f52e479ac6030e70355",
+  "position": {
+    "x": 284.25302826379544,
+    "y": 146.43337819650068,
+    "z": 6002,
+    "height": 75.800807537012119,
+    "width": 237.73889636608345,
+    "tabOrder": 6002
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dCentroDistribuicao"
+                    }
+                  },
+                  "Property": "Centro_Distribuicao"
+                }
+              },
+              "queryRef": "dCentroDistribuicao.Centro_Distribuicao",
+              "nativeQueryRef": "Centro_Distribuicao",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "selection": [
+        {
+          "properties": {
+            "selectAllCheckboxEnabled": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "syncGroup": {
+      "groupName": "Centro_Distribuicao",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "c5d44b170b405b08480d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dCentroDistribuicao"
+              }
+            },
+            "Property": "Centro_Distribuicao"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

@@ -1,0 +1,316 @@
+table fEntregas
+	lineageTag: c97d247a-d5ff-4c28-832e-da55247c973d
+
+	column ID_Entrega
+		dataType: string
+		isHidden
+		lineageTag: 0ca7029e-b507-4ae8-a42c-aa9170e33b61
+		summarizeBy: none
+		sourceColumn: ID_Entrega
+
+		annotation SummarizationSetBy = Automatic
+
+	column Numero_CTe
+		dataType: string
+		lineageTag: c5138bad-44f7-47aa-9e5c-eb8401707a27
+		summarizeBy: none
+		sourceColumn: Numero_CTe
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_Cliente
+		dataType: string
+		isHidden
+		lineageTag: b1c19da4-0abf-42fc-99a9-c3ee651b27eb
+		summarizeBy: none
+		sourceColumn: ID_Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_CD
+		dataType: string
+		isHidden
+		lineageTag: 81e1dbe3-4cdd-457f-91f9-1bdccadbdcd2
+		summarizeBy: none
+		sourceColumn: ID_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_Destino
+		dataType: string
+		isHidden
+		lineageTag: d9cc25bd-d944-46d2-9c71-c07dd48256ba
+		summarizeBy: none
+		sourceColumn: ID_Destino
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_Transportadora
+		dataType: string
+		isHidden
+		lineageTag: 09e15d8a-bb30-49f2-9fb8-67e666e4e3af
+		summarizeBy: none
+		sourceColumn: ID_Transportadora
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_Veiculo
+		dataType: string
+		isHidden
+		lineageTag: 03fa48d6-fb0a-4995-9e6c-aae34facdc89
+		summarizeBy: none
+		sourceColumn: ID_Veiculo
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_Motorista
+		dataType: string
+		isHidden
+		lineageTag: e70529f6-9198-4451-9978-6b51a0c9ed29
+		summarizeBy: none
+		sourceColumn: ID_Motorista
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_Status
+		dataType: string
+		isHidden
+		lineageTag: f8496fb6-1b0c-46bb-8949-1786764efe6f
+		summarizeBy: none
+		sourceColumn: ID_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_Ocorrencia
+		dataType: string
+		isHidden
+		lineageTag: 2a4ea0c1-44c8-40b3-9e9a-6b419c4cab87
+		summarizeBy: none
+		sourceColumn: ID_Ocorrencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Coleta
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 66d5b2a9-26e0-404a-aa9d-4b7f87d05aba
+		summarizeBy: none
+		sourceColumn: Data_Coleta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Data_Prevista_Entrega
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 52bd662c-a485-4afe-a4c3-8f94b15fe3e9
+		summarizeBy: none
+		sourceColumn: Data_Prevista_Entrega
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Data_Entrega_Real
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: c0d7fcc5-b00f-4575-9457-81b345ab239c
+		summarizeBy: none
+		sourceColumn: Data_Entrega_Real
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Qtd_Volumes
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b7df2c39-44fc-4bdf-9fbd-f2e5b4a122aa
+		summarizeBy: sum
+		sourceColumn: Qtd_Volumes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qtd_Volumes_Entregues
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 59774a7e-239e-4f6c-98a3-27da6761bc92
+		summarizeBy: sum
+		sourceColumn: Qtd_Volumes_Entregues
+
+		annotation SummarizationSetBy = Automatic
+
+	column Peso_KG
+		dataType: double
+		isHidden
+		formatString: #,##0.0
+		lineageTag: f14d1d6e-aef7-4059-aa91-a02fd01f2d20
+		summarizeBy: sum
+		sourceColumn: Peso_KG
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cubagem_M3
+		dataType: double
+		isHidden
+		formatString: #,##0.00
+		lineageTag: 877da693-9c98-4154-b6ba-9d3b7564799d
+		summarizeBy: sum
+		sourceColumn: Cubagem_M3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Distancia_KM
+		dataType: double
+		isHidden
+		formatString: #,##0.0
+		lineageTag: 183fccec-4043-41d1-9067-75fa0b1d5ce3
+		summarizeBy: sum
+		sourceColumn: Distancia_KM
+
+		annotation SummarizationSetBy = Automatic
+
+	column Valor_Mercadoria
+		dataType: decimal
+		isHidden
+		formatString: "R$"\ #,##0.00
+		lineageTag: a5c05d50-1da9-45ed-ac75-24f66083eb52
+		summarizeBy: sum
+		sourceColumn: Valor_Mercadoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column Valor_Frete
+		dataType: decimal
+		isHidden
+		formatString: "R$"\ #,##0.00
+		lineageTag: 6c730f54-1386-4e99-9140-18ea18253b36
+		summarizeBy: sum
+		sourceColumn: Valor_Frete
+
+		annotation SummarizationSetBy = Automatic
+
+	column Custo_Frete
+		dataType: decimal
+		isHidden
+		formatString: "R$"\ #,##0.00
+		lineageTag: b8801a1f-b538-4fe1-8ff9-5855777f62ff
+		summarizeBy: sum
+		sourceColumn: Custo_Frete
+
+		annotation SummarizationSetBy = Automatic
+
+	column Lead_time_previsto
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 22fea7ee-6b99-4aac-96f0-438bc7168960
+		summarizeBy: sum
+		sourceColumn: Lead_time_previsto
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Lead_time_real
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 10a27d75-5ca5-4492-83cf-3ce1cf89b17d
+		summarizeBy: sum
+		sourceColumn: Lead_time_real
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dias_de_atraso
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f7b59e7f-efc4-498a-bd11-a926ab5df171
+		summarizeBy: sum
+		sourceColumn: Dias_de_atraso
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Flag_On_Time
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b967d695-cc31-4030-991c-7fb538fb31ff
+		summarizeBy: sum
+		sourceColumn: Flag_On_Time
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Flag_In_Full
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e9d015c1-605c-4acb-bfcc-9af951fb9f7d
+		summarizeBy: sum
+		sourceColumn: Flag_In_Full
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Flag_OTIF
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b62bb4d5-9eb5-440c-be45-77d52ca43c01
+		summarizeBy: sum
+		sourceColumn: Flag_OTIF
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Faixa_Distancia
+		dataType: string
+		lineageTag: 23949cf6-ccf1-40cc-a44a-bf8db2b25432
+		summarizeBy: none
+		sourceColumn: Faixa_Distancia
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fEntregas = m
+		mode: import
+		queryGroup: 02_Fatos
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\isaqu\Documents\Projeto Matheus\PROJETO LOGISTICA\Fato_Entregas.csv"),[Delimiter=";", Columns=21, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ID_Entrega", type text}, {"Numero_CTe", type text}, {"ID_Cliente", type text}, {"ID_CD", type text}, {"ID_Destino", type text}, {"ID_Transportadora", type text}, {"ID_Veiculo", type text}, {"ID_Motorista", type text}, {"ID_Status", type text}, {"ID_Ocorrencia", type text}, {"Data_Coleta", type date}, {"Data_Prevista_Entrega", type date}, {"Data_Entrega_Real", type date}, {"Qtd_Volumes", Int64.Type}, {"Qtd_Volumes_Entregues", Int64.Type}, {"Peso_KG", type number}, {"Cubagem_M3", type number}, {"Distancia_KM", type number}, {"Valor_Mercadoria", Currency.Type}, {"Valor_Frete", Currency.Type}, {"Custo_Frete", Currency.Type}}, "en-US"),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "Lead time previsto", each Duration.Days( [Data_Prevista_Entrega] - [Data_Coleta] )),
+				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Lead time real", each if [Data_Entrega_Real] = null then null
+				else Duration.Days( [Data_Entrega_Real] - [Data_Coleta] )),
+				    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "Dias de atraso", each if [Data_Entrega_Real] = null then null
+				else Duration.Days( [Data_Entrega_Real] - [Data_Prevista_Entrega] )),
+				    #"Added Custom3" = Table.AddColumn(#"Added Custom2", "Flag On Time", each if [Data_Entrega_Real] = null then 0
+				else if [Data_Entrega_Real] <= [Data_Prevista_Entrega] then 1 else 0),
+				    #"Added Custom4" = Table.AddColumn(#"Added Custom3", "Flag In Full", each if [Qtd_Volumes_Entregues] >= [Qtd_Volumes] then 1 else 0),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Custom4",{{"Flag On Time", "Flag_On_Time"}, {"Flag In Full", "Flag_In_Full"}}),
+				    #"Added Custom5" = Table.AddColumn(#"Renamed Columns", "Flag OTIF", each if [Flag_On_Time] = 1 and [Flag_In_Full] = 1 then 1 else 0),
+				    #"Added Custom6" = Table.AddColumn(#"Added Custom5", "Faixa_Distancia", each if [Distancia_KM] <= 100 then "01. Até 100 km"
+				else if [Distancia_KM] <= 400 then "02. 101 a 400 km"
+				else if [Distancia_KM] <= 800 then "03. 401 a 800 km"
+				else if [Distancia_KM] <= 1500 then "04. 801 a 1.500 km"
+				else "05. Acima de 1.500 km"),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Added Custom6",{{"Flag OTIF", "Flag_OTIF"}, {"Lead time previsto", "Lead_time_previsto"}, {"Lead time real", "Lead_time_real"}, {"Dias de atraso", "Dias_de_atraso"}})
+				in
+				    #"Renamed Columns1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,84 @@
+table dDestino
+	lineageTag: 2136c5ec-d060-441d-8966-7f6735888c4d
+
+	column ID_Destino
+		dataType: string
+		isHidden
+		lineageTag: 1c22b6ab-84fa-4207-ba24-d60ebf2ab51b
+		summarizeBy: none
+		sourceColumn: ID_Destino
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cidade_Destino
+		dataType: string
+		lineageTag: 1ffe20ac-eff1-4cf2-ac18-1f9b57a6be87
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: Cidade_Destino
+
+		annotation SummarizationSetBy = Automatic
+
+	column UF_Destino
+		dataType: string
+		lineageTag: 79107fab-af49-44c9-9592-0352c2598008
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: UF_Destino
+
+		annotation SummarizationSetBy = Automatic
+
+	column Regiao_Destino
+		dataType: string
+		lineageTag: eebf4d09-97e6-4003-8ee0-b3bac64ae605
+		summarizeBy: none
+		sourceColumn: Regiao_Destino
+
+		annotation SummarizationSetBy = Automatic
+
+	column Latitude_Destino
+		dataType: double
+		lineageTag: 2d5bb9e3-fd39-4f41-8dad-96ce3f76672c
+		dataCategory: Latitude
+		summarizeBy: none
+		sourceColumn: Latitude_Destino
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Longitude_Destino
+		dataType: double
+		lineageTag: e7859a05-770f-429a-b07c-31bb19418920
+		dataCategory: Longitude
+		summarizeBy: none
+		sourceColumn: Longitude_Destino
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Tipo_Praca
+		dataType: string
+		lineageTag: 9a1dcd60-da07-435c-ad2d-03e77f4acb0e
+		summarizeBy: none
+		sourceColumn: Tipo_Praca
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dDestino = m
+		mode: import
+		queryGroup: 03_Dimensões
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\isaqu\Documents\Projeto Matheus\PROJETO LOGISTICA\Dimensoes_Logistica.xlsx"), null, true),
+				    dDestino_Sheet = Source{[Item="dDestino",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(dDestino_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ID_Destino", type text}, {"Cidade_Destino", type text}, {"UF_Destino", type text}, {"Regiao_Destino", type text}, {"Latitude_Destino", type number}, {"Longitude_Destino", type number}, {"Tipo_Praca", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,54 @@
+relationship AutoDetected_4393f518-6799-4961-bed4-16c7da8986c3
+	fromColumn: fEntregas.ID_Cliente
+	toColumn: dCliente.ID_Cliente
+
+relationship AutoDetected_ccd438e7-bdd7-4c23-bcdf-b41f3bd8faea
+	fromColumn: fEntregas.ID_CD
+	toColumn: dCentroDistribuicao.ID_CD
+
+relationship AutoDetected_5630f19b-4108-453e-bd1e-beb355e64640
+	fromColumn: fMetas.ID_CD
+	toColumn: dCentroDistribuicao.ID_CD
+
+relationship AutoDetected_1aedeedb-0d85-457d-be07-f038379532d0
+	fromColumn: fEntregas.ID_Destino
+	toColumn: dDestino.ID_Destino
+
+relationship AutoDetected_fe0129dc-48e9-423e-bef9-05279cd0c5af
+	fromColumn: fEntregas.ID_Transportadora
+	toColumn: dTransportadora.ID_Transportadora
+
+relationship AutoDetected_60ecac58-c618-4cd8-a00a-486775de4b5d
+	fromColumn: fEntregas.ID_Veiculo
+	toColumn: dVeiculo.ID_Veiculo
+
+relationship AutoDetected_564e4439-269e-4f39-9f81-7475c954bb6f
+	fromColumn: fEntregas.ID_Motorista
+	toColumn: dMotorista.ID_Motorista
+
+relationship AutoDetected_7e725fbe-0b1f-4c2a-b9d8-12d42ca4aa7a
+	fromColumn: fEntregas.ID_Status
+	toColumn: dStatus.ID_Status
+
+relationship b3994d44-3cc9-14dc-aca7-7f0b8df6f6fd
+	fromColumn: fEntregas.Data_Coleta
+	toColumn: dCalendario.Data
+
+relationship AutoDetected_a120b5af-079f-4203-81ee-7a614b7400f5
+	fromColumn: fEntregas.ID_Ocorrencia
+	toColumn: dOcorrencia.ID_Ocorrencia
+
+relationship 787718e1-3f22-c276-31df-0dbe38ddf354
+	isActive: false
+	fromColumn: fEntregas.Data_Prevista_Entrega
+	toColumn: dCalendario.Data
+
+relationship 02c159a7-2b5c-92b0-7c1c-771ec60c5f86
+	isActive: false
+	fromColumn: fEntregas.Data_Entrega_Real
+	toColumn: dCalendario.Data
+
+relationship 75140962-10f7-fca1-07f8-22351913b162
+	fromColumn: fMetas.Ano_Mes
+	toColumn: dCalendario.Data
+

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "otif_faixa_distancia",
+  "position": {
+    "x": 53,
+    "y": 431,
+    "z": 9,
+    "height": 260,
+    "width": 708,
+    "tabOrder": 9
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fEntregas"
+                    }
+                  },
+                  "Property": "Faixa_Distancia"
+                }
+              },
+              "queryRef": "fEntregas.Faixa_Distancia",
+              "nativeQueryRef": "Faixa_Distancia",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "% OTIF"
+                }
+              },
+              "queryRef": "_Medidas.% OTIF",
+              "nativeQueryRef": "% OTIF"
+            }
+          ]
+        },
+        "Legend": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dDestino"
+                    }
+                  },
+                  "Property": "Regiao_Destino"
+                }
+              },
+              "queryRef": "dDestino.Regiao_Destino",
+              "nativeQueryRef": "Regiao_Destino",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,70 @@
+table dTransportadora
+	lineageTag: e0557394-e058-4aaa-8201-1cda8933a952
+
+	column ID_Transportadora
+		dataType: string
+		isHidden
+		lineageTag: 4ba8202a-2f8d-4d8d-b2a1-f3fd90918bd3
+		summarizeBy: none
+		sourceColumn: ID_Transportadora
+
+		annotation SummarizationSetBy = Automatic
+
+	column Transportadora
+		dataType: string
+		lineageTag: c21e67ae-2070-404f-bac6-b814d25c2c34
+		summarizeBy: none
+		sourceColumn: Transportadora
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tipo_Frota
+		dataType: string
+		lineageTag: ebdbac77-5543-4a12-be62-c0ccd56a7ec9
+		summarizeBy: none
+		sourceColumn: Tipo_Frota
+
+		annotation SummarizationSetBy = Automatic
+
+	column Modal
+		dataType: string
+		lineageTag: b4faca91-1489-4968-99b0-f428baf510bf
+		summarizeBy: none
+		sourceColumn: Modal
+
+		annotation SummarizationSetBy = Automatic
+
+	column UF_Sede
+		dataType: string
+		lineageTag: cc0154d7-1c80-4b43-bf0f-25588c944639
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: UF_Sede
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLA_Contratual_Dias
+		dataType: int64
+		formatString: 0
+		lineageTag: ce28080f-7f4b-4aa2-be3e-b3ae4259260c
+		summarizeBy: none
+		sourceColumn: SLA_Contratual_Dias
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dTransportadora = m
+		mode: import
+		queryGroup: 03_Dimensões
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\isaqu\Documents\Projeto Matheus\PROJETO LOGISTICA\Dimensoes_Logistica.xlsx"), null, true),
+				    dTransportadora_Sheet = Source{[Item="dTransportadora",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(dTransportadora_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ID_Transportadora", type text}, {"Transportadora", type text}, {"Tipo_Frota", type text}, {"Modal", type text}, {"UF_Sede", type text}, {"SLA_Contratual_Dias", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

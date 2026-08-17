@@ -1,0 +1,80 @@
+table dMotorista
+	lineageTag: 25f7b86e-abfc-4991-8428-4443aa5809f8
+
+	column ID_Motorista
+		dataType: string
+		isHidden
+		lineageTag: 949dbd09-13e1-4a7d-886c-bea643a14b22
+		summarizeBy: none
+		sourceColumn: ID_Motorista
+
+		annotation SummarizationSetBy = Automatic
+
+	column Motorista
+		dataType: string
+		lineageTag: fd279fee-5050-4f24-8bbc-b4239f35abf2
+		summarizeBy: none
+		sourceColumn: Motorista
+
+		annotation SummarizationSetBy = Automatic
+
+	column Categoria_CNH
+		dataType: string
+		lineageTag: ecff576c-a410-4205-9dd6-16ccb15f3e64
+		summarizeBy: none
+		sourceColumn: Categoria_CNH
+
+		annotation SummarizationSetBy = Automatic
+
+	column UF_Base
+		dataType: string
+		lineageTag: 686ed9c1-f34d-4109-918e-a58d1608df86
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: UF_Base
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Admissao
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: b040c5a1-c75a-4c21-869f-aee2ccc433d6
+		summarizeBy: none
+		sourceColumn: Data_Admissao
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Vinculo
+		dataType: string
+		lineageTag: b17fea51-6555-4594-bb8b-e21a5a8c54f0
+		summarizeBy: none
+		sourceColumn: Vinculo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Curso_MOPP
+		dataType: string
+		lineageTag: f7bee4d5-eab4-4433-911b-9677064a9e5e
+		summarizeBy: none
+		sourceColumn: Curso_MOPP
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dMotorista = m
+		mode: import
+		queryGroup: 03_Dimensões
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\isaqu\Documents\Projeto Matheus\PROJETO LOGISTICA\Dimensoes_Logistica.xlsx"), null, true),
+				    dMotorista_Sheet = Source{[Item="dMotorista",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(dMotorista_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ID_Motorista", type text}, {"Motorista", type text}, {"Categoria_CNH", type text}, {"UF_Base", type text}, {"Data_Admissao", type date}, {"Vinculo", type text}, {"Curso_MOPP", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

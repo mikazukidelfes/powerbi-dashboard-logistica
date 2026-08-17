@@ -1,0 +1,59 @@
+table dStatus
+	lineageTag: eaeac268-eda4-4196-8c22-6495c60d20ac
+
+	column ID_Status
+		dataType: string
+		isHidden
+		lineageTag: 9ea5e874-ade3-456f-b317-2354a5d77b4e
+		summarizeBy: none
+		sourceColumn: ID_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status_Entrega
+		dataType: string
+		lineageTag: 23d57ada-143c-457e-ba03-e3756b5b704e
+		summarizeBy: none
+		sourceColumn: Status_Entrega
+
+		annotation SummarizationSetBy = Automatic
+
+	column Grupo_Status
+		dataType: string
+		lineageTag: 25949e41-a3f6-47a1-a039-1f5d70acc1b6
+		summarizeBy: none
+		sourceColumn: Grupo_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Flag_Finalizada
+		dataType: string
+		lineageTag: 3f66cb2c-1a70-43c7-b6e1-0633828edaca
+		summarizeBy: none
+		sourceColumn: Flag_Finalizada
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordem_Status
+		dataType: int64
+		formatString: 0
+		lineageTag: dac07412-0955-4e56-82a0-dbd6753cff36
+		summarizeBy: none
+		sourceColumn: Ordem_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dStatus = m
+		mode: import
+		queryGroup: 03_Dimensões
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\isaqu\Documents\Projeto Matheus\PROJETO LOGISTICA\Dimensoes_Logistica.xlsx"), null, true),
+				    dStatus_Sheet = Source{[Item="dStatus",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(dStatus_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ID_Status", type text}, {"Status_Entrega", type text}, {"Grupo_Status", type text}, {"Flag_Finalizada", type text}, {"Ordem_Status", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,150 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "c67c551dc91395d3cdbb",
+  "position": {
+    "x": 521.42857142857144,
+    "y": 432.85714285714289,
+    "z": 8,
+    "height": 270,
+    "width": 718.57142857142867,
+    "tabOrder": 8
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fEntregas"
+                    }
+                  },
+                  "Property": "Numero_CTe"
+                }
+              },
+              "queryRef": "Sum(fEntregas.Numero_CTe)",
+              "nativeQueryRef": "Numero_CTe"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dCliente"
+                    }
+                  },
+                  "Property": "Cliente"
+                }
+              },
+              "queryRef": "dCliente.Cliente",
+              "nativeQueryRef": "Cliente"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dCentroDistribuicao"
+                    }
+                  },
+                  "Property": "UF_CD"
+                }
+              },
+              "queryRef": "dCentroDistribuicao.UF_CD",
+              "nativeQueryRef": "UF_CD"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dDestino"
+                    }
+                  },
+                  "Property": "UF_Destino"
+                }
+              },
+              "queryRef": "dDestino.UF_Destino",
+              "nativeQueryRef": "UF_Destino"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dTransportadora"
+                    }
+                  },
+                  "Property": "Transportadora"
+                }
+              },
+              "queryRef": "dTransportadora.Transportadora",
+              "nativeQueryRef": "Transportadora"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fEntregas"
+                    }
+                  },
+                  "Property": "Dias_de_atraso"
+                }
+              },
+              "queryRef": "Sum(fEntregas.Dias_de_atraso)",
+              "nativeQueryRef": "Dias_de_atraso"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dCalendario"
+                    }
+                  },
+                  "Property": "Data"
+                }
+              },
+              "queryRef": "dCalendario.Data",
+              "nativeQueryRef": "Data"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fEntregas"
+                    }
+                  },
+                  "Property": "Valor_Frete"
+                }
+              },
+              "queryRef": "Sum(fEntregas.Valor_Frete)",
+              "nativeQueryRef": "Valor_Frete"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fEntregas"
+                    }
+                  },
+                  "Property": "Custo_Frete"
+                }
+              },
+              "queryRef": "Sum(fEntregas.Custo_Frete)",
+              "nativeQueryRef": "Custo_Frete"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

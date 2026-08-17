@@ -1,0 +1,139 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "9423137a624e9ac66736",
+  "position": {
+    "x": 444,
+    "y": 222,
+    "z": 5,
+    "height": 252,
+    "width": 395,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "hundredPercentStackedBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dTransportadora"
+                    }
+                  },
+                  "Property": "Modal"
+                }
+              },
+              "queryRef": "dTransportadora.Modal",
+              "nativeQueryRef": "Modal",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dVeiculo"
+                    }
+                  },
+                  "Property": "Tipo_Veiculo"
+                }
+              },
+              "queryRef": "dVeiculo.Tipo_Veiculo",
+              "nativeQueryRef": "Tipo_Veiculo"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Custo de Frete"
+                }
+              },
+              "queryRef": "_Medidas.Custo de Frete",
+              "nativeQueryRef": "Custo de Frete"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Medidas"
+                  }
+                },
+                "Property": "Custo de Frete"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "d097681d77e95369bd81",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Custo de Frete"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "282c3343c02071285889",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dVeiculo"
+              }
+            },
+            "Property": "Tipo_Veiculo"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f24543a1dd86696d7807",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dTransportadora"
+              }
+            },
+            "Property": "Modal"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

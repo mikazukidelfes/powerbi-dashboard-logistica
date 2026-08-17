@@ -1,0 +1,408 @@
+table _Medidas
+	lineageTag: 369ec82e-4a0a-4586-836c-193520bd3fff
+
+	measure 'Qtd Entregas' = COUNTROWS ( fEntregas )
+		formatString: 0
+		displayFolder: 01 Volumes
+		lineageTag: 58f39e85-f32d-4b85-a49a-446269b3be2e
+
+	measure 'Entregas Concluídas' =
+			
+			CALCULATE (
+			    [Qtd Entregas],
+			    dStatus[Status_Entrega] IN { "Entregue", "Entregue com Avaria" }
+			)
+		formatString: 0
+		displayFolder: 01 Volumes
+		lineageTag: 27c42464-4609-4e58-8030-975c3c64665f
+
+	measure 'Entregas em Aberto' =
+			
+			CALCULATE ( [Qtd Entregas], dStatus[Grupo_Status] = "Em Andamento" )
+		formatString: 0
+		displayFolder: 01 Volumes
+		lineageTag: 469d5eca-b733-4ff4-ae7d-7be51b945bc2
+
+	measure 'Volumes Expedidos' = SUM ( fEntregas[Qtd_Volumes] )
+		formatString: #,##0
+		displayFolder: 01 Volumes
+		lineageTag: 7910663d-78aa-4bd5-a0cf-05254a29cde8
+
+	measure 'Volumes Entregues' = SUM ( fEntregas[Qtd_Volumes_Entregues] )
+		formatString: #,##0
+		displayFolder: 01 Volumes
+		lineageTag: ab8ad4d0-e2fe-4b47-8f1b-e8bda07544f1
+
+	measure 'Peso Transportado (t)' = DIVIDE ( SUM ( fEntregas[Peso_KG] ), 1000 )
+		formatString: #,##0.0
+		displayFolder: 01 Volumes
+		lineageTag: ddc1b836-e25a-483f-a2bb-cb4580f01313
+
+	measure 'Cubagem (m³)' = SUM ( fEntregas[Cubagem_M3] )
+		formatString: #,##0.0
+		displayFolder: 01 Volumes
+		lineageTag: e011002a-53c5-4085-a3e7-e7af1dc5c6c0
+
+	measure 'KM Rodados' = SUM ( fEntregas[Distancia_KM] )
+		formatString: #,##0
+		displayFolder: 01 Volumes
+		lineageTag: b96eb8c0-5b46-4a17-a793-1bb93b24c9a5
+
+	measure 'Receita de Frete' = SUM ( fEntregas[Valor_Frete] )
+		formatString: "R$"\ #,##0
+		displayFolder: 02 Financeiro
+		lineageTag: a3aab500-9d0e-4107-bec5-aaef0e4863e9
+
+	measure 'Custo de Frete' = SUM ( fEntregas[Custo_Frete] )
+		formatString: "R$"\ #,##0
+		displayFolder: 02 Financeiro
+		lineageTag: d3bf6355-48ac-4fc0-8aab-6570153118dd
+
+	measure 'Margem de Frete' = [Receita de Frete] - [Custo de Frete]
+		formatString: "R$"\ #,##0
+		displayFolder: 02 Financeiro
+		lineageTag: db321b0f-31ed-4a5d-bf6d-a86d48cdb79c
+
+	measure '% Margem de Frete' = DIVIDE ( [Margem de Frete], [Receita de Frete] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 02 Financeiro
+		lineageTag: 80d485f1-b04d-438c-bb4b-46ab3fb1ed43
+
+	measure 'Frete Médio por Entrega' = DIVIDE ( [Receita de Frete], [Qtd Entregas] )
+		formatString: "R$"\ #,##0
+		displayFolder: 02 Financeiro
+		lineageTag: 482e03e9-a17d-495c-8fac-5e024e30cb66
+
+	measure 'Custo por KM' = DIVIDE ( [Custo de Frete], [KM Rodados] )
+		formatString: "R$"\ 0.00
+		displayFolder: 02 Financeiro
+		lineageTag: 2ca00d6c-e1f9-4487-a7c6-37a3a3068f35
+
+	measure 'Custo por Tonelada' = DIVIDE ( [Custo de Frete], [Peso Transportado (t)] )
+		formatString: "R$"\ #,##0
+		displayFolder: 02 Financeiro
+		lineageTag: 8cbc498e-9c4c-45f0-8ccc-400f8f755a34
+
+	measure 'Custo por Volume' = DIVIDE ( [Custo de Frete], [Volumes Expedidos] )
+		formatString: "R$"\ 0.00
+		displayFolder: 02 Financeiro
+		lineageTag: 73f528af-1170-4d68-9c75-e8c6adcf6fce
+
+	measure '% Frete sobre Mercadoria' =
+			
+			DIVIDE ( [Receita de Frete], SUM ( fEntregas[Valor_Mercadoria] ) )
+		formatString: 0.00%
+		displayFolder: 02 Financeiro
+		lineageTag: b9e20659-71ca-4b63-8a1e-bb7c7b1f8fbf
+
+	measure 'Entregas no Prazo' =
+			
+			CALCULATE (
+			    [Entregas Concluídas],
+			    KEEPFILTERS ( fEntregas[Flag_On_Time] = 1 )
+			)
+		formatString: 0
+		displayFolder: 03 Nível de Serviço
+		lineageTag: 5f40d1a4-91a0-4ef0-ac8d-80c7426710c0
+
+	measure '% On Time' = DIVIDE ( [Entregas no Prazo], [Entregas Concluídas] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 03 Nível de Serviço
+		lineageTag: 5f525c58-8665-4d2f-af42-6420c99a59cf
+
+	measure '% In Full' =
+			
+			VAR _Full =
+			    CALCULATE ( [Entregas Concluídas], KEEPFILTERS ( fEntregas[Flag_In_Full] = 1 ) )
+			RETURN
+			    DIVIDE ( _Full, [Entregas Concluídas] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 03 Nível de Serviço
+		lineageTag: 6b02405f-f3d0-4537-9cd2-97c335188966
+
+	measure '% OTIF' =
+			
+			VAR _OTIF =
+			    CALCULATE ( [Entregas Concluídas], KEEPFILTERS ( fEntregas[Flag_OTIF] = 1 ) )
+			RETURN
+			    DIVIDE ( _OTIF, [Entregas Concluídas] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 03 Nível de Serviço
+		lineageTag: 23ba2f8a-97e8-4c15-b29b-c328e1fe6f9b
+
+	measure 'Lead Time Médio (dias)' = AVERAGE ( fEntregas[Lead_time_real] )
+		formatString: 0.0
+		displayFolder: 03 Nível de Serviço
+		lineageTag: 925d8e07-395d-4151-b81f-5c3fa506cb03
+
+	measure 'Lead Time Prometido (dias)' = AVERAGE ( fEntregas[Lead_time_previsto] )
+		formatString: 0.0
+		displayFolder: 03 Nível de Serviço
+		lineageTag: 3b723322-3e44-4342-8505-dc4ec6e638f6
+
+	measure 'Desvio de Lead Time' = [Lead Time Médio (dias)] - [Lead Time Prometido (dias)]
+		formatString: 0.0
+		displayFolder: 03 Nível de Serviço
+		lineageTag: bf9f5a36-f3df-4cfd-b6f8-021698cc13af
+
+	measure 'Atraso Médio dos Atrasados' =
+			
+			AVERAGEX (
+			    FILTER ( fEntregas, fEntregas[Dias_de_Atraso] > 0 ),
+			    fEntregas[Dias_de_Atraso]
+			)
+		formatString: 0.0
+		displayFolder: 03 Nível de Serviço
+		lineageTag: 3626518c-398d-4b31-953a-c7a2cb85c513
+
+	measure 'Entregas Atrasadas' = [Entregas Concluídas] - [Entregas no Prazo]
+		formatString: 0
+		displayFolder: 03 Nível de Serviço
+		lineageTag: be14eb27-dee1-4434-9b63-74e6a134d0ad
+
+	measure 'Qtd Ocorrências' =
+			
+			CALCULATE ( [Qtd Entregas], dOcorrencia[Flag_Ocorrencia] = "Sim" )
+		formatString: 0
+		displayFolder: 04 Ocorrências
+		lineageTag: 8df776c0-44a9-4f21-9aef-9d3303808525
+
+	measure '% Entregas com Ocorrência' = DIVIDE ( [Qtd Ocorrências], [Qtd Entregas] )
+		formatString: 0.0%
+		displayFolder: 04 Ocorrências
+		lineageTag: 7ffbd417-1f5f-4020-bfbd-6e8024a45183
+
+	measure 'Qtd Extravios' =
+			
+			CALCULATE ( [Qtd Entregas], dStatus[Status_Entrega] = "Extraviada" )
+		formatString: 0
+		displayFolder: 04 Ocorrências
+		lineageTag: c2098738-3e4f-4b06-9374-202913a80995
+
+	measure '% Devolução' =
+			
+			VAR _Dev = CALCULATE ( [Qtd Entregas], dStatus[Status_Entrega] = "Devolvida" )
+			RETURN
+			    DIVIDE ( _Dev, [Qtd Entregas] )
+		formatString: 0.00%
+		displayFolder: 04 Ocorrências
+		lineageTag: a8afca46-0b58-4a80-9528-d7415738aa27
+
+	measure 'Valor de Mercadoria em Risco' =
+			
+			CALCULATE (
+			    SUM ( fEntregas[Valor_Mercadoria] ),
+			    dStatus[Status_Entrega] IN { "Extraviada", "Devolvida", "Entregue com Avaria" }
+			)
+		formatString: "R$"\ #,##0
+		displayFolder: 04 Ocorrências
+		lineageTag: 1d5329bf-3150-4435-b4fb-ea72f87b5de5
+
+	measure 'Custo Extra de Ocorrências' =
+			
+			VAR _CustoMedioSemOco =
+			    CALCULATE (
+			        DIVIDE ( [Custo de Frete], [Qtd Entregas] ),
+			        dOcorrencia[Flag_Ocorrencia] = "Não",
+			        ALLSELECTED ( dOcorrencia )
+			    )
+			VAR _ComOco = [Qtd Ocorrências]
+			RETURN
+			    CALCULATE ( [Custo de Frete], dOcorrencia[Flag_Ocorrencia] = "Sim" )
+			        - _CustoMedioSemOco * _ComOco
+		formatString: "R$"\ #,##0
+		displayFolder: 04 Ocorrências
+		lineageTag: b447f0f3-f85c-4a9e-976b-8f91aec62793
+
+	measure 'Capacidade Ofertada (kg)' =
+			
+			SUMX ( fEntregas, RELATED ( dVeiculo[Capacidade_KG] ) )
+		formatString: #,##0
+		displayFolder: 05 Frota
+		lineageTag: 9dfc717b-7eb3-4334-a3a5-a68fb63249a5
+
+	measure '% Ocupação de Peso' =
+			
+			DIVIDE ( SUM ( fEntregas[Peso_KG] ), [Capacidade Ofertada (kg)] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 05 Frota
+		lineageTag: d8f4696a-98e3-4712-b041-425f511680ed
+
+	measure 'Densidade da Carga (kg/m³)' =
+			
+			DIVIDE ( SUM ( fEntregas[Peso_KG] ), SUM ( fEntregas[Cubagem_M3] ) )
+		formatString: #,##0
+		displayFolder: 05 Frota
+		lineageTag: 88246f2b-6224-4883-a121-44fccd0b0ee5
+
+	measure 'Idade Média da Frota' =
+			
+			AVERAGEX ( dVeiculo, YEAR ( TODAY () ) - dVeiculo[Ano_Fabricacao] )
+		formatString: 0.0
+		displayFolder: 05 Frota
+		lineageTag: bf8a0925-d138-4846-bd9b-54a789a6bd92
+
+	measure 'Meta OTIF' = AVERAGE ( fMetas[Meta_OTIF] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 06 Metas
+		lineageTag: 81c85d59-075d-4d18-aab0-d5999240b397
+
+	measure 'Gap OTIF vs Meta' = [% OTIF] - [Meta OTIF]
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 06 Metas
+		lineageTag: 1f343eec-1053-40a0-888e-83cb7f2171e9
+
+	measure 'Meta de Entregas' = SUM ( fMetas[Meta_Entregas] )
+		formatString: #,##0
+		displayFolder: 06 Metas
+		lineageTag: 921d9bc9-9237-4103-9fc0-751ba47aabbf
+
+	measure '% Atingimento de Entregas' = DIVIDE ( [Qtd Entregas], [Meta de Entregas] )
+		formatString: 0.0%
+		displayFolder: 06 Metas
+		lineageTag: a795444c-7bf0-4528-acae-ebdaa66a0152
+
+	measure 'Status da Meta (KPI)' =
+			
+			SWITCH (
+			    TRUE (),
+			    ISBLANK ( [% OTIF] ), "Sem dados",
+			    [% OTIF] >= [Meta OTIF], "Dentro da meta",
+			    [% OTIF] >= [Meta OTIF] - 0.03, "Atenção",
+			    "Fora da meta"
+			)
+		displayFolder: 06 Metas
+		lineageTag: 112043ff-5d44-4250-8d0c-acf25b335431
+
+	measure 'Cor do KPI OTIF' =
+			
+			SWITCH (
+			    [Status da Meta (KPI)],
+			    "Dentro da meta", "#1E7B34",
+			    "Atenção", "#B58100",
+			    "Fora da meta", "#B3261E",
+			    "#8A8886"
+			)
+		displayFolder: 06 Metas
+		lineageTag: 8bb57df1-733e-4811-a25c-f03385fb59bc
+
+	measure 'Entregas Mês Anterior' =
+			
+			CALCULATE ( [Qtd Entregas], DATEADD ( dCalendario[Data], -1, MONTH ) )
+		formatString: 0
+		displayFolder: 07 Tempo
+		lineageTag: 3eee4edb-c0b2-4392-962e-178554158575
+
+	measure 'Var % MoM Entregas' =
+			
+			DIVIDE ( [Qtd Entregas] - [Entregas Mês Anterior], [Entregas Mês Anterior] )
+		formatString: 0.0%
+		displayFolder: 07 Tempo
+		lineageTag: dea1eec8-16b3-4214-94b2-1a1a6351ccdf
+
+	measure 'Receita Ano Anterior' =
+			
+			CALCULATE ( [Receita de Frete], SAMEPERIODLASTYEAR ( dCalendario[Data] ) )
+		formatString: "R$"\ #,##0
+		displayFolder: 07 Tempo
+		lineageTag: 68161104-df2c-42b9-9904-c0c1d3942989
+
+	measure 'Var % YoY Receita' =
+			
+			DIVIDE ( [Receita de Frete] - [Receita Ano Anterior], [Receita Ano Anterior] )
+		formatString: 0.0%
+		displayFolder: 07 Tempo
+		lineageTag: da53fcd5-d1ab-45e4-9c35-127636655887
+
+	measure 'Receita YTD' = TOTALYTD ( [Receita de Frete], dCalendario[Data] )
+		formatString: "R$"\ #,##0
+		displayFolder: 07 Tempo
+		lineageTag: 5667ac8c-f8c9-4fcd-b92c-32b557bb5d85
+
+	measure '% OTIF Móvel 3M' =
+			
+			VAR _Periodo =
+			    DATESINPERIOD ( dCalendario[Data], MAX ( dCalendario[Data] ), -3, MONTH )
+			RETURN
+			CALCULATE ( [% OTIF], _Periodo )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 07 Tempo
+		lineageTag: 2c26901f-88e8-4e8b-8c9a-c72d92b148c8
+
+	measure 'Entregas por Data de Entrega' =
+			
+			CALCULATE (
+			    [Qtd Entregas],
+			    USERELATIONSHIP ( dCalendario[Data], fEntregas[Data_Entrega_Real] )
+			)
+		formatString: 0
+		displayFolder: 07 Tempo
+		lineageTag: e5f90019-88c9-4d95-a33b-b4627b6c9e00
+
+	measure 'Data da Última Atualização' =
+			
+			"Base atualizada até "
+			    & FORMAT ( MAX ( fEntregas[Data_Coleta] ), "dd/mm/yyyy" )
+		displayFolder: 07 Tempo
+		lineageTag: cb5a3990-e7cc-46d5-89e7-634255d2f7f7
+
+	measure 'Ranking Transportadora por OTIF' =
+			
+			IF (
+			    HASONEVALUE ( dTransportadora[Transportadora] ),
+			    RANKX (
+			        ALLSELECTED ( dTransportadora[Transportadora] ),
+			        [% OTIF],
+			        ,
+			        DESC,
+			        DENSE
+			    )
+			)
+		formatString: 0
+		displayFolder: 08 Ranking
+		lineageTag: 9e710a56-c6d8-4941-88f2-84474b3a8ec7
+
+	measure '% da Receita Total' =
+			
+			DIVIDE (
+			    [Receita de Frete],
+			    CALCULATE ( [Receita de Frete], ALLSELECTED ( dCliente ) )
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 08 Ranking
+		lineageTag: e56c25c4-77f7-4400-827c-3bbb92870949
+
+	measure 'Receita Acumulada (Pareto)' =
+			
+			VAR _Atual = [Receita de Frete]
+			VAR _Tabela =
+			    ADDCOLUMNS (
+			        ALLSELECTED ( dCliente[Cliente] ),
+			        "@Receita", [Receita de Frete]
+			    )
+			RETURN
+			    SUMX ( FILTER ( _Tabela, [@Receita] >= _Atual ), [@Receita] )
+		formatString: "R$"\ #,##0
+		displayFolder: 08 Ranking
+		lineageTag: 1a67f48f-aad3-4bcb-a33c-9ff5a7e2ad27
+
+	measure 'Título Dinâmico' =
+			
+			"Nível de serviço — "
+			    & COALESCE ( SELECTEDVALUE ( dCentroDistribuicao[Centro_Distribuicao] ), "Todos os CDs" )
+			    & " | " & COALESCE ( SELECTEDVALUE ( dCalendario[Ano] ), "Período completo" )
+		displayFolder: 08 Ranking
+		lineageTag: 80160ad7-0bcf-4efb-9fde-44253f88440a
+
+	partition _Medidas = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

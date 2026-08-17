@@ -1,0 +1,93 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "8c759693ce0ac3ec8179",
+  "position": {
+    "x": 44.285714285714292,
+    "y": 332.85714285714289,
+    "z": 4,
+    "height": 370,
+    "width": 478.57142857142861,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dOcorrencia"
+                    }
+                  },
+                  "Property": "Motivo_Ocorrencia"
+                }
+              },
+              "queryRef": "dOcorrencia.Motivo_Ocorrencia",
+              "nativeQueryRef": "Motivo_Ocorrencia",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dOcorrencia"
+                    }
+                  },
+                  "Property": "Responsavel"
+                }
+              },
+              "queryRef": "dOcorrencia.Responsavel",
+              "nativeQueryRef": "Responsavel"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Qtd Ocorrências"
+                }
+              },
+              "queryRef": "_Medidas.Qtd Ocorrências",
+              "nativeQueryRef": "Qtd Ocorrências"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Medidas"
+                  }
+                },
+                "Property": "Qtd Ocorrências"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

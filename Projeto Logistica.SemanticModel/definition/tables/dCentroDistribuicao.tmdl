@@ -1,0 +1,95 @@
+table dCentroDistribuicao
+	lineageTag: bd73d731-b849-4c06-ac91-f95fd95d8b11
+
+	column ID_CD
+		dataType: string
+		isHidden
+		lineageTag: 6fcdf2e0-eeee-4d97-a3ab-c6886ea43d5a
+		summarizeBy: none
+		sourceColumn: ID_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column Centro_Distribuicao
+		dataType: string
+		lineageTag: 3dd17eee-9406-44f2-8b0c-64d22df5aad7
+		summarizeBy: none
+		sourceColumn: Centro_Distribuicao
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cidade_CD
+		dataType: string
+		lineageTag: 9c0fcdcc-ea38-4a14-a0c5-60333900bf9c
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: Cidade_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column UF_CD
+		dataType: string
+		lineageTag: 22c36bb4-9ff6-4003-9239-2fd9d94c2af2
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: UF_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column Regiao_CD
+		dataType: string
+		lineageTag: 08f3bfee-e85d-445d-b660-d3290afd7e5a
+		summarizeBy: none
+		sourceColumn: Regiao_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column Latitude_CD
+		dataType: double
+		lineageTag: 6c37ef2e-f66f-42bd-bfcc-96b6ebbf6e7d
+		dataCategory: Latitude
+		summarizeBy: sum
+		sourceColumn: Latitude_CD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Longitude_CD
+		dataType: double
+		lineageTag: f989128f-eecc-43a6-b56e-756466db1d99
+		dataCategory: Longitude
+		summarizeBy: sum
+		sourceColumn: Longitude_CD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Data_Inauguracao
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 47869ad6-3207-417a-94e1-47a821f59727
+		summarizeBy: none
+		sourceColumn: Data_Inauguracao
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition dCentroDistribuicao = m
+		mode: import
+		queryGroup: 03_Dimensões
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\isaqu\Documents\Projeto Matheus\PROJETO LOGISTICA\Dimensoes_Logistica.xlsx"), null, true),
+				    dCentroDistribuicao_Sheet = Source{[Item="dCentroDistribuicao",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(dCentroDistribuicao_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ID_CD", type text}, {"Centro_Distribuicao", type text}, {"Cidade_CD", type text}, {"UF_CD", type text}, {"Regiao_CD", type text}, {"Latitude_CD", type number}, {"Longitude_CD", type number}, {"Data_Inauguracao", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

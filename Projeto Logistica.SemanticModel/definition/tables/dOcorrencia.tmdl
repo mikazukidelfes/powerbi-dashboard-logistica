@@ -1,0 +1,61 @@
+table dOcorrencia
+	lineageTag: 53f53a37-5eea-4e37-b45f-b1e829a159d0
+
+	column ID_Ocorrencia
+		dataType: string
+		isHidden
+		lineageTag: 98231081-1982-41c4-bef9-cc195ebea3df
+		summarizeBy: none
+		sourceColumn: ID_Ocorrencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Motivo_Ocorrencia
+		dataType: string
+		lineageTag: afddec35-eb51-4f83-b9ae-348f1ed94654
+		summarizeBy: none
+		sourceColumn: Motivo_Ocorrencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Categoria_Ocorrencia
+		dataType: string
+		lineageTag: efb86e03-ba4a-45a8-9f9d-0d2345779378
+		summarizeBy: none
+		sourceColumn: Categoria_Ocorrencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Responsavel
+		dataType: string
+		lineageTag: 005e9745-f7ee-4612-bf18-97ff9fd71e18
+		summarizeBy: none
+		sourceColumn: Responsavel
+
+		annotation SummarizationSetBy = Automatic
+
+	column Flag_Ocorrencia
+		dataType: string
+		lineageTag: a40508b1-ec90-45ec-8004-6f1e3b4aecc1
+		summarizeBy: none
+		sourceColumn: Flag_Ocorrencia
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dOcorrencia = m
+		mode: import
+		queryGroup: 03_Dimensões
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\isaqu\Documents\Projeto Matheus\PROJETO LOGISTICA\Dimensoes_Logistica.xlsx"), null, true),
+				    dOcorrencia_Sheet = Source{[Item="dOcorrencia",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(dOcorrencia_Sheet,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"ID_Ocorrencia", type text}, {"Motivo_Ocorrencia", type text}, {"Categoria_Ocorrencia", type text}, {"Responsavel", type text}, {"Flag_Ocorrencia", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

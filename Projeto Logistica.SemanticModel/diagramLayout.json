@@ -1,0 +1,178 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 55.308912695847468,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 693.18635499593961,
+            "y": 687.65458977453454
+          },
+          "nodeIndex": "dCentroDistribuicao",
+          "nodeLineageTag": "bd73d731-b849-4c06-ac91-f95fd95d8b11",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 770.52001052938022,
+            "y": 20
+          },
+          "nodeIndex": "dCliente",
+          "nodeLineageTag": "a15c1633-9828-4da5-b699-b3336d4faacd",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 90.297717574278067,
+            "y": 0
+          },
+          "nodeIndex": "dDestino",
+          "nodeLineageTag": "2136c5ec-d060-441d-8966-7f6735888c4d",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1138.9463961299664,
+            "y": 362.94873962197175
+          },
+          "nodeIndex": "dMotorista",
+          "nodeLineageTag": "25f7b86e-abfc-4991-8428-4443aa5809f8",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 1014.9541326957606,
+            "y": 37.90408409643328
+          },
+          "nodeIndex": "dOcorrencia",
+          "nodeLineageTag": "53f53a37-5eea-4e37-b45f-b1e829a159d0",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 137.4772637251981,
+            "y": 918.80816819286656
+          },
+          "nodeIndex": "dStatus",
+          "nodeLineageTag": "eaeac268-eda4-4196-8c22-6495c60d20ac",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 288.65325243857978
+          },
+          "nodeIndex": "dTransportadora",
+          "nodeLineageTag": "e0557394-e058-4aaa-8201-1cda8933a952",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 109.99403336272098,
+            "y": 603.07792689894291
+          },
+          "nodeIndex": "dVeiculo",
+          "nodeLineageTag": "c8d3433a-59c3-4033-9536-2b589a0b4f94",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 989.95413269576056,
+            "y": 672.35400980033933
+          },
+          "nodeIndex": "fMetas",
+          "nodeLineageTag": "39d150e7-d287-414a-b7cd-d93c4821fda9",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 450.95413269576056,
+            "y": 0
+          },
+          "nodeIndex": "dCalendario",
+          "nodeLineageTag": "4020aa13-d769-4b2d-8651-a6737b5a46da",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 442.89180143982117,
+            "y": 394.27446835517912
+          },
+          "nodeIndex": "fEntregas",
+          "nodeLineageTag": "c97d247a-d5ff-4c28-832e-da55247c973d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 1372.9463961299664,
+            "y": 507.40408409643328
+          },
+          "nodeIndex": "_Medidas",
+          "nodeLineageTag": "369ec82e-4a0a-4586-836c-193520bd3fff",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 79.553182037699813,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

@@ -1,0 +1,177 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "bbcbb10297269550e1a6",
+  "position": {
+    "x": 761.45356662180347,
+    "y": 431,
+    "z": 3,
+    "height": 260.13458950201886,
+    "width": 478.92328398384927,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dCentroDistribuicao"
+                    }
+                  },
+                  "Property": "Centro_Distribuicao"
+                }
+              },
+              "queryRef": "dCentroDistribuicao.Centro_Distribuicao",
+              "nativeQueryRef": "Centro_Distribuicao",
+              "active": true
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fEntregas"
+                        }
+                      },
+                      "Property": "Qtd_Volumes"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(fEntregas.Qtd_Volumes)",
+              "nativeQueryRef": "Sum of Qtd_Volumes"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fEntregas"
+                        }
+                      },
+                      "Property": "Distancia_KM"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(fEntregas.Distancia_KM)",
+              "nativeQueryRef": "Sum of Distancia_KM",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "% OTIF"
+                }
+              },
+              "queryRef": "_Medidas.% OTIF",
+              "nativeQueryRef": "% OTIF"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "5cb2732c05410ca108bd",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "% OTIF"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2a14268ebc10e7de0c31",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fEntregas"
+                  }
+                },
+                "Property": "Distancia_KM"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "89361b66007b1520d2d6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dCentroDistribuicao"
+              }
+            },
+            "Property": "Centro_Distribuicao"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "043dcbb495c9a41393ee",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fEntregas"
+                  }
+                },
+                "Property": "Qtd_Volumes"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

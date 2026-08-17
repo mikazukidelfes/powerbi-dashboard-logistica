@@ -1,0 +1,167 @@
+table dCalendario
+	lineageTag: 4020aa13-d769-4b2d-8651-a6737b5a46da
+	dataCategory: Time
+
+	column Data
+		isKey
+		lineageTag: 2bda5b8c-fda4-48c6-974e-f73697095931
+		summarizeBy: none
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano
+		lineageTag: e6216026-09a0-4885-a7fc-d5ff6ab8e482
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Ano]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nº Mês'
+		isHidden
+		lineageTag: 861564a8-9090-4f9a-bf04-d28c8c31c5d3
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Nº Mês]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mês
+		lineageTag: 77583ecf-13d8-4b6e-b329-ee095c8d2686
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mês]
+		sortByColumn: 'Nº Mês'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês Ano'
+		lineageTag: 2715d480-f340-4733-9b45-c6522d1133e8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mês Ano]
+		sortByColumn: 'Ano Mês (ordem)'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ano Mês (ordem)'
+		isHidden
+		lineageTag: 65fe008e-7f40-4815-9405-df40cf4781ba
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Ano Mês (ordem)]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		lineageTag: d47170fc-240c-411a-8cab-4ca990a205e7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Trimestre]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ano Trimestre'
+		lineageTag: b610d631-be2a-4ab4-ae68-0a1f074fb5b3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Ano Trimestre]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Semana do Ano'
+		lineageTag: aa09225c-6a3c-4029-8807-7eb668a8b18d
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Semana do Ano]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nº Dia Semana'
+		lineageTag: 7304c650-5e94-44b5-96d2-f8ad62131a69
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Nº Dia Semana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dia da Semana'
+		lineageTag: edd921af-d796-4d14-a889-668431c21533
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Dia da Semana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fim de Semana'
+		lineageTag: 1c098e2b-5bb6-4308-9ec7-0c8cf50f23dd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Fim de Semana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Início do Mês'
+		lineageTag: e6a5964a-dffd-41aa-9f50-53248e309273
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Início do Mês]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fim do Mês'
+		lineageTag: 710481b9-8f69-4682-8ed8-6f48b891edd8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Fim do Mês]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês Fechado'
+		lineageTag: 922da8ad-40dd-450d-948c-82837a2e5c11
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mês Fechado]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCalendario = calculated
+		mode: import
+		source = ```
+				
+				VAR _MinData = MIN ( fEntregas[Data_Coleta] )
+				VAR _MaxData =
+				    MAXX (
+				        fEntregas,
+				        MAX ( fEntregas[Data_Prevista_Entrega], fEntregas[Data_Coleta] )
+				    )
+				VAR _Base =
+				    CALENDAR (
+				        DATE ( YEAR ( _MinData ), 1, 1 ),
+				        DATE ( YEAR ( _MaxData ), 12, 31 )
+				    )
+				RETURN
+				    ADDCOLUMNS (
+				        _Base,
+				        "Ano", YEAR ( [Date] ),
+				        "Nº Mês", MONTH ( [Date] ),
+				        "Mês", FORMAT ( [Date], "MMM", "pt-BR" ),
+				        "Mês Ano", FORMAT ( [Date], "MMM/yy", "pt-BR" ),
+				        "Ano Mês (ordem)", YEAR ( [Date] ) * 100 + MONTH ( [Date] ),
+				        "Trimestre", "T" & QUARTER ( [Date] ),
+				        "Ano Trimestre", FORMAT ( [Date], "yyyy" ) & "-T" & QUARTER ( [Date] ),
+				        "Semana do Ano", WEEKNUM ( [Date], 2 ),
+				        "Nº Dia Semana", WEEKDAY ( [Date], 2 ),
+				        "Dia da Semana", FORMAT ( [Date], "ddd", "pt-BR" ),
+				        "Fim de Semana", IF ( WEEKDAY ( [Date], 2 ) > 5, "Fim de Semana", "Dia Útil" ),
+				        "Início do Mês", EOMONTH ( [Date], -1 ) + 1,
+				        "Fim do Mês", EOMONTH ( [Date], 0 ),
+				        "Mês Fechado",
+				            IF ( EOMONTH ( [Date], 0 ) <= MAX ( fEntregas[Data_Coleta] ), "Sim", "Não" )
+				    )
+				
+				```
+
+	annotation PBI_Id = e0ac8f3911ba4d33a59fab8873de1c69
+
